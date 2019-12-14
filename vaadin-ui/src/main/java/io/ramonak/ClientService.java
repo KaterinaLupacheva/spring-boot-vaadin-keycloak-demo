@@ -1,19 +1,23 @@
 package io.ramonak;
 
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 public class ClientService {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final KeycloakRestTemplate keycloakRestTemplate;
+
+    public ClientService(KeycloakRestTemplate keycloakRestTemplate) {
+        this.keycloakRestTemplate = keycloakRestTemplate;
+    }
 
     public List<String> getMonths() {
-        return restTemplate.exchange("http://localhost:9999/months",
+        return keycloakRestTemplate.exchange("http://localhost:9999/months",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<String>>() {})
@@ -21,7 +25,7 @@ public class ClientService {
     }
 
     public String getAdminPage() {
-        return restTemplate.exchange("http://localhost:9999/admin",
+        return keycloakRestTemplate.exchange("http://localhost:9999/admin",
                 HttpMethod.GET,
                 null,
                 String.class)
