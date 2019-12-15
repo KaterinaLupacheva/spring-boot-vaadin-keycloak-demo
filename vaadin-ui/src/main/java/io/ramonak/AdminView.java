@@ -5,7 +5,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route("admin")
+@Route(value = "admin", layout = MainView.class)
 public class AdminView extends Div {
 
     public AdminView(@Autowired ClientService clientService) {

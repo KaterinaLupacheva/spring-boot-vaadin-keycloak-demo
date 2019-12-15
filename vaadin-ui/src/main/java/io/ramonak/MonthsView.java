@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Route("months")
+@Route(value = "months", layout = MainView.class)
 public class MonthsView extends Div {
 
     public MonthsView(@Autowired ClientService clientService) {
